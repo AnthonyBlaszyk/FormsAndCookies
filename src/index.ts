@@ -40,11 +40,15 @@ app.get("/options", (request, response) => {
   response.render("options", { darkMode, noCookie });
 });
 
+app.get("/colorOptions", (request, response) => {
+  response.render("colorOptions", { darkMode, noCookie });
+});
+
 app.post("/handle-form", formParser, (request, response) => {
   // request.body contains an object with our named fields
-  const cookieValue = Object.keys(request.body)[0];
+  const cookieValue = request.body;
 
-  if (cookieValue === "deleteCookie") {
+  if (cookieValue.cookie === "deleteCookie") {
     response.set(
       "Set-Cookie",
       cookie.serialize("myCookie", "", {
@@ -54,11 +58,25 @@ app.post("/handle-form", formParser, (request, response) => {
   } else {
     response.set(
       "Set-Cookie",
-      cookie.serialize("myCookie", cookieValue, {
+      cookie.serialize("myCookie", cookieValue.cookie, {
         maxAge: 3600, // This is the time (in seconds) that this cookie will be stored
       }),
     );
   }
+
+  response.redirect("/");
+});
+
+app.post("/handleColor-form", formParser, (request, response) => {
+  // request.body contains an object with our named fields
+  const cookieColorValue = Object.keys(request.body)[0];
+
+  response.set(
+    "Set-Cookie",
+    cookie.serialize("cookieForColor", cookieColorValue, {
+      maxAge: 3600, // This is the time (in seconds) that this cookie will be stored
+    }),
+  );
 
   response.redirect("/");
 });
