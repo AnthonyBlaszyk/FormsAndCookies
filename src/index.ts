@@ -38,11 +38,15 @@ app.get("/", (request, response) => {
 });
 
 app.get("/options", (request, response) => {
-  response.render("options", { darkMode, noCookie });
+  const cookies = cookie.parse(request.get("cookie") || "");
+
+  response.render("options", { darkMode, noCookie, cookies });
 });
 
 app.get("/colorOptions", (request, response) => {
-  response.render("colorOptions", { darkMode, noCookie });
+  const cookies = cookie.parse(request.get("cookie") || "");
+
+  response.render("colorOptions", { darkMode, noCookie, cookies });
 });
 
 app.post("/handle-form", formParser, (request, response) => {

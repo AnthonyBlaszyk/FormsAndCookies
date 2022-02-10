@@ -11,8 +11,34 @@
       <link href="/styleWithoutCookie.css" rel="stylesheet">
     {% endif %}
 
-    {% block style%}{% endblock %}
+    <style>
+      {% if darkMode %}
 
+        {% if cookies.cookieForColor === "purple" %}
+          body{
+            background-color: rgb(51, 0, 53)
+          }
+        {% elif  cookies.cookieForColor === "green" %}
+          body{
+            background-color: rgb(3, 31, 8);
+          }
+        {% endif %}
+
+      {% elif noCookie %}
+
+      {% else %}
+        {% if cookies.cookieForColor === "purple" %}
+          body{
+            background-color: rgb(151, 100, 151)
+          }
+        {% elif  cookies.cookieForColor === "green" %}
+          body{
+            background-color: rgb(145, 197, 173);
+          }
+        {% endif %}
+
+      {% endif %}
+    </style>
   </head>
   <body>
     <header>
