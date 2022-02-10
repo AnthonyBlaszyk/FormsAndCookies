@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Document</title>
+    <link href="/style.css" rel="stylesheet">
+
+    {% if darkMode %}
+      <link href="/styleDarkMode.css" rel="stylesheet">
+    {% elif noCookie %}
+      <link href="/styleWithoutCookie.css" rel="stylesheet">
+    {% endif %}
+
+  </head>
+  <body>
+    <header>
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+  <form action="/handle-form" method="POST" class="form">
+
+    <div>
+      <label>Light cookie</label>
+      <input type="radio" name="lightMode">
+    </div>
+
+    <div>
+      <label>Dark cookie</label>
+      <input type="radio" name="darkMode">
+    </div>
+
+    <div>
+      <label>Eat the cookie</label>
+      <input type="radio" name="deleteCookie">
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+{% endblock %}
