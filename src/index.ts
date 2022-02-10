@@ -18,6 +18,7 @@ app.set("view engine", "njk");
 
 app.get("/", (request, response) => {
   const cookies = cookie.parse(request.get("cookie") || "");
+  // const colorCookies = cookie.parse(request.get("colorCookie") || "");
 
   // check if we have cookie
   if (cookies.myCookie === undefined) {
@@ -33,7 +34,7 @@ app.get("/", (request, response) => {
     darkMode = false;
   }
 
-  response.render("home", { darkMode, noCookie });
+  response.render("home", { darkMode, noCookie, cookies });
 });
 
 app.get("/options", (request, response) => {
@@ -69,11 +70,11 @@ app.post("/handle-form", formParser, (request, response) => {
 
 app.post("/handleColor-form", formParser, (request, response) => {
   // request.body contains an object with our named fields
-  const cookieColorValue = Object.keys(request.body)[0];
+  const cookieColorValue = request.body;
 
   response.set(
     "Set-Cookie",
-    cookie.serialize("cookieForColor", cookieColorValue, {
+    cookie.serialize("cookieForColor", cookieColorValue.colorCookie, {
       maxAge: 3600, // This is the time (in seconds) that this cookie will be stored
     }),
   );
